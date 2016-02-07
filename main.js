@@ -5,58 +5,71 @@ d3.json(data_url, function(error, json) {
     console.log('===Error===', error);
   }
 
-  var x = d3.scale.linear()
-    .domain([1947, 2015])
-    .range([0, 1000]);
-
-  var y = d3.scale.linear()
-    .domain([0, 19000])
-    .range([500, 0]);
-
-  var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .ticks(10);
-  
-  var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(8);
-
-  var w = 1000;
+  var w = 1200;
   var h = 500;
 
+  var minDate = new Date(json.data[0][0]);
+  var maxDate = new Date(json.data[json.data.length - 1][0]);
+
+  // ===== Create SVG =====
   var svg = d3.select('body')
-              .append('svg')
-              .attr("width", w)
-              .attr("height", h);
+    .append('svg')
+    .attr({
+      width: w,
+      height: h
+    });
 
-  svg.append('g')
-    .attr('class', 'x axis')
-    .attr('transform', 'translate(0, ' + 470 + ')')
-    .call(xAxis);
-
-  svg.append('g')
-    .attr('class', 'y axis')
-    .attr('transform', 'translate(' + 60 + ', 0)')
-    .call(yAxis);
-
+  // ===== Create bar chart graph =====
   svg.selectAll('rect')
-    .data(json.data)
-    .enter()
-    .append('rect')
-    .attr("x", function(d, i) {
-      return i * (1000 / json.data.length);
-    })
-    .attr("y", function(d, i) {
-      return y(d[1]);
-    })
-    .attr("width", 10)
-    .attr("height", 500)
-    .attr("fill", "rgba(0,0,0, 0.2)")
+     .data(json.data)
+     .enter()
+     .append('rect')
+     .attr({
+       x: function(d, i) {
+         return i * (1000 / json.data.length);
+       },
+       y: function(d, i) {
+         return h - ( (h * d[1]) / 20000 );
+       },
+       width: (w / json.data.length),
+       height: function(d) { return d[1]; },
+       transform: 'translate(50, -20)',
+       fill: '#3399CC'
+     });
+
+  // ===== Create X axis =====
+  var xScale = d3.time.scale()
+    .domain([minDate, maxDate])
+    .range([0, 1000]);
+
+  var xAxisCreate = d3.svg.axis()
+    .scale(xScale)
+    .orient('bottom')
+    .ticks(d3.time.years, 5);;
+
+  var xAxis = svg.append('g')
+    .call(xAxisCreate)
+    .attr({
+      'class':'axis',
+      'transform': 'translate(50, ' + (h-20) + ')'
+    });
+
+  // ===== Create Y axis =====
+  var yScale = d3.scale.linear()
+    .domain([0, 20000])
+    .range([h, 0]);
+
+  var yAxisCreate = d3.svg.axis()
+    .scale(yScale)
+    .orient('left');
+
+  var yAxis = svg.append('g')
+    .call(yAxisCreate)
+    .attr({
+      'class': 'axis',
+      'transform': 'translate(50, -20)'
+    });
+
+  // ===== Create tooltip =====
 
 });
-
-
-
-
