@@ -1,6 +1,6 @@
 ### Data Visualization with D3 - Bar Chart of GDP
 
-# [DEMO](http://yhagio.github.io/3-bar-chart)
+# [DEMO](http://yhagio.github.io/d3-bar-chart)
 
 ### Data Source
 - [U.S.A. - Gross Domestic Product ](https://research.stlouisfed.org/fred2/data/GDP.txt)
