@@ -2,6 +2,8 @@
 
 # [DEMO](http://yhagio.github.io/D3-bar-chart/)
 
+![Screenshot](/SCR.png)
+
 ### Data Source
 - [U.S.A. - Gross Domestic Product ](https://research.stlouisfed.org/fred2/data/GDP.txt)
 - https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json

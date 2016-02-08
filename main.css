@@ -1,10 +1,12 @@
+/* Main Title */
 .title {
-  margin: 30px;
+  margin: 20px auto 10px;
   font-family: sans-serif;
   text-align: center;
   color: #3399CC;
 }
 
+/* Axis */
 .axis path,
 .axis line {
   fill: none;
@@ -17,6 +19,7 @@
   font-size: 14px;
 }
 
+/* Tooltip */
 #tooltip {
   position: absolute;
   width: 130px;
@@ -36,4 +39,21 @@
   font-family: sans-serif;
   font-size: 16px;
   line-height: 20px;
+}
+
+/* Footer */
+.createdBy {
+  text-align: center;
+  margin: 0;
+}
+
+.heartImage {
+  vertical-align: bottom;
+  width: 14px;
+  margin-right: 5px;
+}
+
+.nameLink {
+  color: #3399CC;
+  font-weight: bold;
 }
